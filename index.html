@@ -24,12 +24,14 @@
                 <i class="bi bi-book "></i>
                 <a class="navbar-brand">Book Shop</a>
             </div>
+            <!-- -----search bar------ -->
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search"  placeholder="Search Book" aria-label="Search">
+                <input class="form-control me-2" id="search-bar" type="search"  placeholder="Search Book" aria-label="Search">
                 <button class="btn btn-secondary" type="submit">
                     <i class="bi bi-search"></i>
                 </button>
             </form>
+            <!-- --------------------- -->
             <div class="user-section">
                 <button class="btn btn-dark button-circle" onclick="activeCart()" >
                 <i class="bi bi-cart4"></i>
@@ -93,8 +95,33 @@
     <!-- ----------------cards ------------------- -->
     <section class="container mt-5" >
         <h3>Best Sellers</h3>
-        <div class="row gy-5" id="cards-container">  
-            <!-- -------cards-------- -->
+        <div class="row gy-5" id="cards-container">
+
+            <!-- -------card template-------- -->
+            <template id="book-card-template">
+                <div class="col-2 col-lg-3 col-md-4 col-6">
+                    <div class="card">
+                        <i class="bi bi-eye-slash-fill"></i>
+                        <img src="" class="card-img-top"  alt="">
+                        
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
+        
+                            <div class="price-buttons">
+                                <span class="book-price"></span>
+                                <div>
+                                     <button class="btn btn-outline-success add-button button-circle">
+                                        <i class="bi bi-cart-plus" id="cart-icon"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>;
+            </template>
+            <!-- -------card template-------- -->
+
         </div>        
     </section>
     <!-- ------------------------------------------ -->

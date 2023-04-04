@@ -89,7 +89,24 @@ h3 {
 
 .card img {
     height: 18rem;
-    
+    position: relative;
+    object-fit:cover;
+}
+
+.card > i {
+    position: absolute;
+    z-index: 1;
+    font-size: 1.5rem;
+    top: .3rem;
+    right: 1rem;
+    color: white;
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.card > i:hover {
+    opacity: 100%;
+    font-size: 1.6rem;
 }
 
 .card-body {
@@ -120,6 +137,7 @@ h3 {
 .card-text {
     font-size: .85rem;
     color: rgb(117, 117, 117);
+    text-transform: capitalize;
 }
 
 .price-buttons span{
@@ -128,6 +146,10 @@ h3 {
 
 .cart-added {
     background-color: rgb(255, 201, 86);
+}
+
+.hide {
+    display: none;
 }
 
 /* ------footer-------- */
@@ -165,7 +187,7 @@ footer a {
     z-index: 1;
     top: 4.4rem;
     right: 0rem;
-    width: 15rem;
+    width: 17rem;
     min-height: 100vh;
     padding: 1.5rem;
     background-color: white;
@@ -175,15 +197,23 @@ footer a {
     transition-duration: .5s;
 }
 
+/* @media screen and (max-width: 530px ){
+    .cart{
+        height: calc(100vh - 6rem);
+    }
+} */
+
 .active {
     transform: translateX(0%) ;
 }
 
-.close-cart{
+#close-cart{
     position: absolute;
-    font-size: 1.2rem;
     top: 1.3rem;
     left: 15rem;
+    cursor: pointer;
+    font-size: 1.3rem;
+
 }
 
 .cart > div:first-of-type {
@@ -198,3 +228,4 @@ footer a {
 }
 
 
+/* ------cart cards------ */

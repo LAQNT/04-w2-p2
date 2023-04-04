@@ -1,50 +1,47 @@
 
+let booksUrl = 'https://striveschool-api.herokuapp.com/books';
 
-function fetchData() {
-    let url = 'https://striveschool-api.herokuapp.com/books';
-
+async function booksFetchData(url) {
     fetch(url)
-
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
-        result = data;
-        console.log(result);
+            console.log(data)
+            books = data.map(book => {
+                // ---------------select card template------------
+                const bookCardTemplate = document.querySelector('#book-card-template');
+                // -------define variables with DOM selector-----
+                const bookCard = bookCardTemplate.content.cloneNode(true).children[0];
+                
+                // -------define variables with DOM selector-----
+                const img = bookCard.querySelector('.card-img-top');
+                const title = bookCard.querySelector('.card-title');
+                const genre = bookCard.querySelector('.card-text');
+                const price = bookCard.querySelector('.book-price');
+                 
+                // -------asign value to variables from JSON----
+                img.src = book.img;
+                title.textContent = book.title;
+                genre.textContent = 'Genre: '+ book.category;
+                price.textContent = '€ '+ book.price;
 
+                // -------asign container for cards -----------
+                const cardsContainer = document.getElementById('cards-container');
 
-        let container = document.getElementById('cards-container');
+                cardsContainer.append(bookCard); 
+                
+                return {title: book.title, element: bookCard }
+            })
+            
+        // -----functions call-------
+        hideBook()
+        searchBook()
+        console.log(books)
 
-        data.forEach(book => {
-            let card = 
-            `<div class="col--2 col-lg-3 col-md-4 col-6">
-                <div class="card";">
-                    <img src="${book.img}" class="card-img-top"    alt="${book.asin}">
-                    <div class="card-body">
-                        <h5 class="card-title">${book.title}</h5>
-                        <p class="card-text">Genre: ${book.category}</p>
-
-                        <div class="price-buttons">
-                            <span>${'€ '+book.price}</span>
-
-                            <div>
-                                 <button class="btn btn-outline-success add-button button-circle" onclick="addBookToCart(this)" >
-                                    <i class="bi bi-cart-plus" id="cart-icon"></i>
-                                </button>
-                                
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-            container.innerHTML += card;     
-        });
-    })
-    
-    // .catch(error) => {
-    //     console.error('Error found', error);
-    // }
+        })
 }
-fetchData();
+
+booksFetchData(booksUrl);
+
 
 
 // -----add book to cart-----
@@ -69,15 +66,76 @@ function hideCart() {
     cart.classList.remove('active'); 
 }
 
+
+
+
+
+
+
+
 // ----add book to cart-------
-function addBookToCart(x){ 
+// function addBookToCart(x){ 
+ 
+
+//         if ((x.classList.contains('.cart-added')) == false){
+    
+//             x.classList.add('.cart-added');
+//         }
+    
 
 
-        if ((x.classList.contains('.cart-added')) == false){
+// }
+
+// ----hide book card-------
+function hideBook() {
+    let buttonsHide = document.querySelectorAll('.bi-eye-slash-fill');
+
+    for (let button of buttonsHide){
+        button.addEventListener('click' , () => {
+            button.parentElement.parentElement.style.display = 'none';
+        })
+
+    }
+}
     
-            x.classList.add('.cart-added');
-        }
+// ----search bar filter-------
+function searchBook(x) {
+    // let books = [];
     
+    let searchInput = document.getElementById('search-bar');
+
+    searchInput.addEventListener('input' , e => {
+        const inputValue = e.target.value.toLowerCase();
+        console.log(inputValue)
+        
+        books.forEach(book => {
+            const isVisible = book.title.toLowerCase().includes(inputValue);
+            // console.log(isVisible)
+
+            book.element.classList.toggle('hide' , !isVisible);
+        });
+    })
+    
+//     let titles = [];
+//         for (let i = 0; i < x.length; i++){
+//            let title = x[i].title;
+//            titles.push(title);
+//         }
+
+//     let bookCard =
+    
+//   searchInput.addEventListener('input', e => {
+//     const inputValue = e.target.value;
+//     console.log(inputValue)
+ 
+//     titles.forEach(title => {
+//       const isVisible = title.includes(inputValue);
+//       title.classList.toggle('hide', !isVisible)
+//     })  
+//   })
+
+    // console.log(titles)
+
 
 
 }
